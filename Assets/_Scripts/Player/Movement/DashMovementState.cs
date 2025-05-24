@@ -11,9 +11,9 @@ public class DashMovementState : MovementBaseState
     {
         base.OnEnter(_stateMachine);
         animator.SetBool("IsDashing", true);
-        dashSpeed = settings.dashSpeed;
-        dashDistance = settings.dashDistance;
-        duration = settings.dashDuration;
+        dashSpeed = characterSettings.dashSpeed;
+        dashDistance = characterSettings.dashDistance;
+        duration = characterSettings.dashDuration;
     }
     public override void OnUpdate()
     {
@@ -38,7 +38,7 @@ public class DashMovementState : MovementBaseState
             }
             
         }
-        if (Input.GetKeyDown(settings.keyAtk))
+        if (Input.GetKeyDown(characterSettings.keyAtk))
         {
             duration = 0;
         }
@@ -47,6 +47,8 @@ public class DashMovementState : MovementBaseState
             stateMachine.SetNextState(new WallSlideMovementState());
             duration = 0;
         }
+
+        
 
     }
     public override void OnExit()

@@ -13,7 +13,7 @@ public class JumpWallMovementState : MovementBaseState
     {
         base.OnEnter(_stateMachine);
         animator.SetBool("IsJumping", true);
-        wallJumpPower = settings.wallJumpPower;
+        wallJumpPower = characterSettings.wallJumpPower;
         PlayerWallJump();
         _coolDownWallSlide = coolDownWallSlide;
         AudioManager.instance.PlayerSFX("Jump");
@@ -47,7 +47,7 @@ public class JumpWallMovementState : MovementBaseState
             stateMachine.SetNextState(new FallMovementState());
             return;
         }
-        if (Input.GetKeyDown(settings.keyDash) && dashPressedTimer > 0)
+        if (Input.GetKeyDown(characterSettings.keyDash) && dashPressedTimer > 0)
         {
             stateMachine.SetNextState(new DashMovementState());
             return;

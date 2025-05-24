@@ -9,10 +9,10 @@ public class GroundFinisherState : MeleeBaseState
         base.OnEnter(_stateMachine);
 
         // Attack
-        attackIndex = settings.groundFinisherAttackIndex;
-        duration = settings.groundFinisherDuration;
-        moveDistance = settings.groundFinisherMoveDistance; // Gán khoảng cách di chuyển
-        moveSpeed = settings.groundFinisherMoveSpeed;      // Gán tốc độ di chuyển
+        attackIndex = characterSettings.groundFinisherAttackIndex;
+        duration = characterSettings.groundFinisherDuration;
+        moveDistance = characterSettings.groundFinisherMoveDistance; // Gán khoảng cách di chuyển
+        moveSpeed = characterSettings.groundFinisherMoveSpeed;      // Gán tốc độ di chuyển
         animator.SetTrigger("Attack" + attackIndex);
     }
 

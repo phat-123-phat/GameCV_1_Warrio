@@ -15,7 +15,7 @@ public class JumpToFallMovementState : MovementBaseState
         {
             stateMachine.SetNextState(new IdleMovementState());
         }
-        if (Input.GetKeyDown(settings.keyDash) && dashPressedTimer > 0)
+        if (Input.GetKeyDown(characterSettings.keyDash) && dashPressedTimer > 0)
         {
             stateMachine.SetNextState(new DashMovementState());
 

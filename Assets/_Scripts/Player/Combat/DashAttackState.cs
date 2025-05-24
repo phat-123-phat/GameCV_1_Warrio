@@ -11,10 +11,10 @@ public class DashAttackState : MeleeBaseState
         base.OnEnter(_stateMachine);
 
         // Attack
-        nameAttack = settings.DashAttackAttackIndex;
-        duration = settings.DashAttackDuration;
-        moveDistance = settings.DashAttackMoveDistance; 
-        moveSpeed = settings.DashAttackMoveSpeed;     
+        nameAttack = characterSettings.DashAttackAttackIndex;
+        duration = characterSettings.DashAttackDuration;
+        moveDistance = characterSettings.DashAttackMoveDistance; 
+        moveSpeed = characterSettings.DashAttackMoveSpeed;     
         animator.SetTrigger("Attack" + nameAttack);
     }
 

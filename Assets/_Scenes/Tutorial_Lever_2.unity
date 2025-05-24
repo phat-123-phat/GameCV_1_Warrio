@@ -14350,6 +14350,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 459934591091467412, guid: 44de33e56eb952b499576d33bec002dd, type: 3}
+      propertyPath: isReturnByDead
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 611434370253689831, guid: 44de33e56eb952b499576d33bec002dd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -14398,6 +14402,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7585697994005855828, guid: 44de33e56eb952b499576d33bec002dd, type: 3}
+      propertyPath: enemySettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 3957dca25766f8849b98e8b32d0cd8a9, type: 2}
+    - target: {fileID: 7585697994005855828, guid: 44de33e56eb952b499576d33bec002dd, type: 3}
+      propertyPath: characterSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: b9bc49eb8a22c4747a60a6349df47441, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

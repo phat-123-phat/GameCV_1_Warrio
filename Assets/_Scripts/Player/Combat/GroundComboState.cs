@@ -9,10 +9,10 @@ public class GroundComboState : MeleeBaseState
         base.OnEnter(_stateMachine);
 
         // Attack
-        attackIndex = settings.groundComboAttackIndex;
-        duration = settings.groundComboDuration;
-        moveDistance = settings.groundComboMoveDistance; // Gán khoảng cách di chuyển
-        moveSpeed = settings.groundComboMoveSpeed;      // Gán tốc độ di chuyển
+        attackIndex = characterSettings.groundComboAttackIndex;
+        duration = characterSettings.groundComboDuration;
+        moveDistance = characterSettings.groundComboMoveDistance; // Gán khoảng cách di chuyển
+        moveSpeed = characterSettings.groundComboMoveSpeed;      // Gán tốc độ di chuyển
         animator.SetTrigger("Attack" + attackIndex);
     }
 

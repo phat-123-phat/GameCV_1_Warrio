@@ -7,7 +7,7 @@ public class BarCtl : MonoBehaviour
 {
     public Image fillBar;
     
-    public void UpdateBar (int currentVal, int maxVal)
+    public void UpdateBar (float currentVal, float maxVal)
     {
         fillBar.fillAmount = currentVal / maxVal;   
     }    

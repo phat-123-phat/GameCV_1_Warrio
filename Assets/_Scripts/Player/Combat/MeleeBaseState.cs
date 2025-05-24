@@ -21,7 +21,7 @@ public class MeleeBaseState : State
     private float distanceMoved;
 
     protected StateMachine movementStateMachine;
-
+    protected bool hasAttacked = false;
     public override void OnEnter(StateMachine _stateMachine)
     {
         base.OnEnter(_stateMachine);
@@ -31,7 +31,7 @@ public class MeleeBaseState : State
         HitEffectPrefab = GetComponent<ComboCharacter>().Hiteffect;
         rb = GetComponent<Rigidbody2D>();
         distanceMoved = 0f; // Reset khoảng cách đã di chuyển
-
+        hasAttacked = false;
         // Lấy movement StateMachine
         StateMachine[] stateMachines = _stateMachine.GetComponents<StateMachine>();
         foreach (var sm in stateMachines)
@@ -52,18 +52,18 @@ public class MeleeBaseState : State
         if (animator.GetFloat("Weapon.Active") > 0f)
         {
             Attack();
-            MoveForward(); // Di chuyển khi vũ khí đang hoạt động
+            MoveForward(); 
         }
         if (animator.GetFloat("AttackWindow.Open") > 0f && AttackPressedTimer > 0)
         {
             shouldCombo = true;
         }
 
-        if (Input.GetKeyDown(settings.keyAtk))
+        if (Input.GetKeyDown(characterSettings.keyAtk))
         {
-            AttackPressedTimer = settings.attackPressedTimerDuration;
+            AttackPressedTimer = characterSettings.attackPressedTimerDuration;
         }
-        if (Input.GetKeyDown(settings.keyJump) && movementStateMachine != null)
+        if (Input.GetKeyDown(characterSettings.keyJump) && movementStateMachine != null)
         {
             // Chuyển combatStateMachine về IdleCombatState
             stateMachine.SetNextStateToMain();
@@ -94,6 +94,11 @@ public class MeleeBaseState : State
 
                 if (hitTeamComponent && hitTeamComponent.teamIndex == TeamIndex.Enemy)
                 {
+                    CharacterHealth enemyHealth = collidersToDamage[i].GetComponent<CharacterHealth>();
+                    if (enemyHealth != null)
+                    {
+                        enemyHealth.TakeDamage(characterSettings.meleeDamage);
+                    }
                     GameObject.Instantiate(HitEffectPrefab, collidersToDamage[i].transform);
                     collidersDamaged.Add(collidersToDamage[i]);
                 }

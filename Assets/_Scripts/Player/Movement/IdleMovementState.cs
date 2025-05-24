@@ -24,11 +24,11 @@ public class IdleMovementState : MovementBaseState
             stateMachine.SetNextState(new FallMovementState());
         }
 
-        if (Input.GetKeyDown(settings.keyJump) &&jumpPressedTimer > 0 && isGrounded  )
+        if (Input.GetKeyDown(characterSettings.keyJump) &&jumpPressedTimer > 0 && isGrounded  )
         {
             stateMachine.SetNextState(new JumpMovementState());
         }
-        if (Input.GetKeyDown(settings.keyDash) && dashPressedTimer > 0 )
+        if (Input.GetKeyDown(characterSettings.keyDash) && dashPressedTimer > 0 )
         {
             stateMachine.SetNextState(new DashMovementState());
         }

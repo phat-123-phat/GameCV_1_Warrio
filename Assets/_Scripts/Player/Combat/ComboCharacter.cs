@@ -39,9 +39,11 @@ public class ComboCharacter : MonoBehaviour
             if (!IsDashing())
             {
                 meleeStateMachine.SetNextState(new GroundEntryState());
+                movementStateMachine.SetNextState(new IdleMovementState());
             } else
             {
                 meleeStateMachine.SetNextState(new DashAttackState());
+                movementStateMachine.SetNextState(new IdleMovementState());
             }
             
         }

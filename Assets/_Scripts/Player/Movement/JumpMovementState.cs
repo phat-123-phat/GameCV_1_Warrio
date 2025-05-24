@@ -10,7 +10,7 @@ public class JumpMovementState : MovementBaseState
     {
         base.OnEnter(_stateMachine);
         animator.SetBool("IsJumping", true);
-        jumpForce = settings.jumpForce;
+        jumpForce = characterSettings.jumpForce;
         PlayerJump();
         AudioManager.instance.PlayerSFX("Jump");
     }
@@ -30,7 +30,7 @@ public class JumpMovementState : MovementBaseState
             stateMachine.SetNextState(new JumpToFallMovementState());
             return;
         }
-        if (Input.GetKeyDown(settings.keyDash) && dashPressedTimer > 0)
+        if (Input.GetKeyDown(characterSettings.keyDash) && dashPressedTimer > 0)
         {
             stateMachine.SetNextState(new DashMovementState());
 

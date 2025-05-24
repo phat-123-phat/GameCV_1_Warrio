@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementCharacter : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class MovementCharacter : MonoBehaviour
 
     public Transform checkWallPos;
 
+    public GameObject MenuDead;
 
-    [SerializeField] private Settings settings; 
+    public bool isReturnByDead = false;
+    [SerializeField] private CharacterSettings settings; 
     private StateMachine movementStateMachine;
 
     private void Awake()
@@ -20,20 +23,24 @@ public class MovementCharacter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Kiểm tra va chạm với các đối tượng có Tag trong danh sách damageTags
+     
         if (settings.damageTags.Contains(collision.tag))
         {
            movementStateMachine.SetNextState(new HurtMovementState());
-           
+            if (isReturnByDead)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        // Kiểm tra va chạm vật lý (nếu bẫy không phải trigger)
-        if (settings.damageTags.Contains(collision.gameObject.tag))
+        // Kiểm tra va chạm với các đối tượng có Tag trong danh sách damageTags
+        if (settings.damageTags.Contains(collision.tag) && collision.gameObject.CompareTag("Trap"))
         {
             movementStateMachine.SetNextState(new HurtMovementState());
+
         }
     }
 

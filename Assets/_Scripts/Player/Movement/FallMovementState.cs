@@ -4,6 +4,7 @@ public class FallMovementState : MovementBaseState
 {
     private float coolDownWallSlide = 0.5f;
     private float _coolDownWallSlide;
+    
     public override void OnEnter(StateMachine _stateMachine)
     {
         base.OnEnter(_stateMachine);
@@ -21,9 +22,11 @@ public class FallMovementState : MovementBaseState
 
         if (isGrounded && rb.velocity.y == 0f)
         {
+            isFallToGround = true;
             stateMachine.SetNextState(new IdleMovementState());
+            
         }
-        if (Input.GetKeyDown(settings.keyDash) && dashPressedTimer > 0)
+        if (Input.GetKeyDown(characterSettings.keyDash) && dashPressedTimer > 0)
         {
             stateMachine.SetNextState(new DashMovementState());
 
@@ -38,5 +41,6 @@ public class FallMovementState : MovementBaseState
     {
         base.OnExit();
         animator.SetBool("IsFalling", false);
+       
     }
 }

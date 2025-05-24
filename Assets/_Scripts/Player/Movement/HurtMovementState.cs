@@ -12,15 +12,15 @@ public class HurtMovementState : MovementBaseState
     {
         base.OnEnter(_stateMachine);
 
-        duration = settings.hurtDuration;
-        knockbackForce = settings.hurtKnockbackForce;
+        duration = characterSettings.hurtDuration;
+        knockbackForce = characterSettings.hurtKnockbackForce;
         // Phát animation bị thương
         animator.SetTrigger("IsHurt");
 
         // Áp dụng lực đẩy lùi
         ApplyKnockback();
 
-        AudioManager.instance.PlayerSFX("Hurt");
+        //AudioManager.instance.PlayerSFX("Hurt");
 
     }
 
@@ -28,18 +28,22 @@ public class HurtMovementState : MovementBaseState
     {
         base.OnUpdate();
 
-        if (duration <= 0)
+        if (fixedtime >= duration)
         {
             if (isGrounded)
             {
                 stateMachine.SetNextState(new IdleMovementState());
+                combatStateMachine.SetNextStateToMain();
             }
             else
             {
                 stateMachine.SetNextState(new FallMovementState());
+                combatStateMachine.SetNextStateToMain();
             }
-
-
+        }
+        if (playerHealth.currentHealth <= 0)
+        {
+            movementCharacter.MenuDead.SetActive(true);
         }
     }
 
@@ -49,9 +53,6 @@ public class HurtMovementState : MovementBaseState
         // Đặt lại vận tốc ngang để tránh trượt
         rb.velocity = new Vector2(0f, rb.velocity.y);
         animator.ResetTrigger("IsHurt");
-
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void ApplyKnockback()

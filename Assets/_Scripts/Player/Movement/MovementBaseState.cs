@@ -6,10 +6,10 @@ using UnityEngine;
 public class MovementBaseState : State
 {
     protected MovementCharacter movementCharacter;
-    public float duration;
+    protected float duration;
     protected Animator animator;
     protected Rigidbody2D rb;
-    protected bool isGrounded;
+    public static bool isGrounded;
     protected bool isTouchingWall;
     protected float distanceToGround;
     protected float distanceToWall;
@@ -33,23 +33,25 @@ public class MovementBaseState : State
     protected float wallCheckRadius;
     protected LayerMask wallLayer;
 
-    
 
+    protected PlayerHealth playerHealth;
+
+    public static bool isFallToGround;
     public override void OnEnter(StateMachine _stateMachine)
     {
         base.OnEnter(_stateMachine);
         movementCharacter = GetComponent<MovementCharacter>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        jumpPressedTimer = settings.jumpPressedTimer;
+        jumpPressedTimer = characterSettings.jumpPressedTimer;
         checkGroundPos = movementCharacter.checkGroundPos;
-        groundCheckRadius = settings.groundCheckRadius;
-        groundLayer = settings.groundLayer;
+        groundCheckRadius = characterSettings.groundCheckRadius;
+        groundLayer = characterSettings.groundLayer;
         checkWallPos = movementCharacter.checkWallPos;
-        wallCheckRadius = settings.wallCheckRadius;
-        wallLayer = settings.wallLayer;
-        moveSpeed = settings.moveSpeed;
-        dashPressedTimer = settings.dashPressedTimer;
+        wallCheckRadius = characterSettings.wallCheckRadius;
+        wallLayer = characterSettings.wallLayer;
+        moveSpeed = characterSettings.moveSpeed;
+        dashPressedTimer = characterSettings.dashPressedTimer;
         StateMachine[] stateMachines = _stateMachine.GetComponents<StateMachine>();
         foreach (var sm in stateMachines)
         {
@@ -59,6 +61,8 @@ public class MovementBaseState : State
                 break;
             }
         }
+
+        playerHealth = GetComponent<PlayerHealth>();
     }
     public override void OnUpdate()
     {
@@ -67,13 +71,9 @@ public class MovementBaseState : State
         UpdateWallCheck();
         PlayerRun();
         RotateDirection();
-       
         moveInput = Input.GetAxisRaw("Horizontal");
-        if (duration >0)
-        {
-            duration -= Time.deltaTime;
-        }
-        
+
+
         if (jumpPressedTimer > 0)
         {
             jumpPressedTimer -= Time.deltaTime;

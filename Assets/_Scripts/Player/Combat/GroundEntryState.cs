@@ -9,10 +9,10 @@ public class GroundEntryState : MeleeBaseState
         base.OnEnter(_stateMachine);
 
         // Attack
-        attackIndex = settings.groundEntryAttackIndex;
-        duration = settings.groundEntryDuration;
-        moveDistance = settings.groundEntryMoveDistance; // Gán khoảng cách di chuyển
-        moveSpeed = settings.groundEntryMoveSpeed;      // Gán tốc độ di chuyển
+        attackIndex = characterSettings.groundEntryAttackIndex;
+        duration = characterSettings.groundEntryDuration;
+        moveDistance = characterSettings.groundEntryMoveDistance; // Gán khoảng cách di chuyển
+        moveSpeed = characterSettings.groundEntryMoveSpeed;      // Gán tốc độ di chuyển
         animator.SetTrigger("Attack" + attackIndex);
     }
 

@@ -24,7 +24,7 @@ public class WallSlideMovementState : MovementBaseState
         {
             stateMachine.SetNextState(new FallMovementState());
         }
-        if (Input.GetKeyDown(settings.keyJump) && !isGrounded && isTouchingWall )
+        if (Input.GetKeyDown(characterSettings.keyJump) && !isGrounded && isTouchingWall )
         {
             stateMachine.SetNextState(new JumpWallMovementState());
         }
